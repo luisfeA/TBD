@@ -1,6 +1,7 @@
     <template>
   <div class="center">
     <h2>{{title}}</h2>
+    <p>{{error}}</p>
     <ul class="user-list">
       <li v-for="(u,i) in users" :key="u.id">
         <img :src="'https://robohash.org/'+i+'?size=50x50'" />
@@ -15,7 +16,8 @@ export default {
   data(){
     return{
       title:'Actores',
-      users:[]
+      users:[],
+      error: ""
     }
   },
   mounted:function(){
@@ -26,10 +28,12 @@ export default {
     .then(response=>{
        // get body data
       this.users = response.body;
+      //this.error = "Se cargo la lista";
      console.log('users',this.users)
     }, response=>{
        // error callback
        console.log('error cargando lista');
+       this.error = "No se cargo la lista";
     })
   }
 }
